@@ -10,6 +10,7 @@ import de.ricewaffle.ricematrix.output.Output;
 import de.ricewaffle.ricematrix.output.Renderer;
 import de.ricewaffle.ricematrix.system.Menu;
 import de.ricewaffle.ricematrix.system.Program;
+import de.ricewaffle.ricematrix.system.ProgramLoader;
 
 public class Main
 {
@@ -48,6 +49,7 @@ public class Main
 		drawThread.start();
 		
 		registerSystemPrograms();
+		registerAdditionalPrograms();
 		openProgram("menu");
 		running = false;
 	}
@@ -60,15 +62,23 @@ public class Main
 	
 	private void registerSystemPrograms()
 	{
-		registerProgram("menu", new Menu());
+		registerProgram(new Menu());
 	}
 	
-	private void registerProgram(String name, Program program)
+	private void registerAdditionalPrograms()
 	{
-		if (!programs.containsKey(name))
-			programs.put(name, program);
+		for (Program program : ProgramLoader.loadFrom("programs"))
+		{
+			registerProgram(program);
+		}
+	}
+	
+	private void registerProgram(Program program)
+	{
+		if (!programs.containsKey(program.name()))
+			programs.put(program.name(), program);
 		else
-			System.out.println("Program with the name " + name + " does already exist! Skipping registration");
+			System.out.println("Program with the name " + program.name() + " does already exist! Skipping registration");
 	}
 	
 	public void openProgram(String name)
@@ -76,6 +86,7 @@ public class Main
 		Class<? extends Program> programclass = programs.get(name).getClass();
 		try {
 			context.push((Program) programclass.newInstance());
+			context.peek().run();
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {

@@ -1,20 +1,21 @@
 package de.ricewaffle.ricematrix.system;
 
-import de.ricewaffle.ricematrix.container.Element;
+import de.ricewaffle.ricematrix.References;
 
 public class Menu extends Program
 {
 	public Menu()
 	{
-		Element rice = new Element("elements/test/rice.re");
-		
-		
+		super("menu");
+	}
+
+	@Override
+	public void run()
+	{
+		References.main.openProgram("snake");
 		while (true)
 		{
-			leds.drawBox(0, 0, 13, 6, false, false, true);
-			leds.drawLedScreen(rice.content(), 1, 1, false);
 			
-			apply();
 		}
 	}
 }

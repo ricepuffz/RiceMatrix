@@ -45,6 +45,8 @@ public class Emulator extends JPanel implements Output
 	@Override
 	public void draw(LedState[][] states)
 	{
+		this.setIgnoreRepaint(true);
+		
 		for (int y = 0; y < 7; y++)
 		{
 			for (int x = 0; x < 14; x++)
@@ -65,6 +67,7 @@ public class Emulator extends JPanel implements Output
 			}
 		}
 		
+		this.setIgnoreRepaint(false);
 		this.repaint();
 	}
 	
