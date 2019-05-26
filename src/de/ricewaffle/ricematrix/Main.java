@@ -7,7 +7,7 @@ import java.util.Stack;
 import de.ricewaffle.ricematrix.container.LedScreen;
 import de.ricewaffle.ricematrix.output.Emulator;
 import de.ricewaffle.ricematrix.output.Output;
-import de.ricewaffle.ricematrix.output.Renderer;
+import de.ricewaffle.ricematrix.output.renderer.Renderer;
 import de.ricewaffle.ricematrix.system.Menu;
 import de.ricewaffle.ricematrix.system.Program;
 import de.ricewaffle.ricematrix.system.ProgramLoader;
@@ -33,9 +33,21 @@ public class Main
 	});  
 	
 	
+	public Main()
+	{
+		this(false);
+	}
+	
 	public Main(boolean emulated)
 	{
+		this(emulated, "");
+	}
+	
+	public Main(boolean emulated, String path)
+	{
 		References.main = this;
+		References.path = path;
+		
 		leds = References.leds;
 		
 		if (emulated)
@@ -54,11 +66,6 @@ public class Main
 		running = false;
 	}
 	
-	public Main()
-	{
-		this(false);
-	}
-	
 	
 	private void registerSystemPrograms()
 	{
@@ -67,7 +74,8 @@ public class Main
 	
 	private void registerAdditionalPrograms()
 	{
-		for (Program program : ProgramLoader.loadFrom("programs"))
+		//for (Program program : ProgramLoader.loadFrom("programs"))
+		for (Program program : ProgramLoader.loadFrom(References.path + "programs"))
 		{
 			registerProgram(program);
 		}
@@ -104,7 +112,13 @@ public class Main
 	public static void main(String[] args)
 	{
 		if (args.length == 1 && args[0].equalsIgnoreCase("emulated"))
+		{
 			new Main(true);
+		}
+		else if (args.length == 2 && args[0].equalsIgnoreCase("emulated"))
+		{
+			new Main(true, args[1]);
+		}
 		else
 			new Main();
 	}
