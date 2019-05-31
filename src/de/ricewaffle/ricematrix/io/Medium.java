@@ -1,8 +1,8 @@
-package de.ricewaffle.ricematrix.output;
+package de.ricewaffle.ricematrix.io;
 
 import de.ricewaffle.ricematrix.container.LedState;
 
-public interface Output
+public interface Medium
 {
 	public void draw(LedState[][] states);
 }

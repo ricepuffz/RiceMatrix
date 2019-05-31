@@ -1,4 +1,4 @@
-package de.ricewaffle.ricematrix.output.renderer;
+package de.ricewaffle.ricematrix.io.renderer;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;

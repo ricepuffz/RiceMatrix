@@ -5,9 +5,9 @@ import java.util.Map;
 import java.util.Stack;
 
 import de.ricewaffle.ricematrix.container.LedScreen;
-import de.ricewaffle.ricematrix.output.Emulator;
-import de.ricewaffle.ricematrix.output.Output;
-import de.ricewaffle.ricematrix.output.renderer.Renderer;
+import de.ricewaffle.ricematrix.io.Medium;
+import de.ricewaffle.ricematrix.io.emulator.Emulator;
+import de.ricewaffle.ricematrix.io.renderer.Renderer;
 import de.ricewaffle.ricematrix.system.Menu;
 import de.ricewaffle.ricematrix.system.Program;
 import de.ricewaffle.ricematrix.system.ProgramLoader;
@@ -16,7 +16,7 @@ public class Main
 {
 	private boolean running = true;
 	
-	private Output output = null;
+	private Medium output = null;
 	private LedScreen leds;
 	
 	private Map<String, Program> programs;

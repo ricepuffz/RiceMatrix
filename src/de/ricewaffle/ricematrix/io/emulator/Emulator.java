@@ -1,4 +1,4 @@
-package de.ricewaffle.ricematrix.output;
+package de.ricewaffle.ricematrix.io.emulator;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -10,8 +10,9 @@ import javax.swing.JPanel;
 
 import de.ricewaffle.ricematrix.container.EmuColor;
 import de.ricewaffle.ricematrix.container.LedState;
+import de.ricewaffle.ricematrix.io.Medium;
 
-public class Emulator extends JPanel implements Output
+public class Emulator extends JPanel implements Medium
 {
 	private static final long serialVersionUID = 7864940670197445872L;
 	
@@ -32,6 +33,8 @@ public class Emulator extends JPanel implements Output
 		
 		JFrame frame = new JFrame("RiceMatrix");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setFocusable(true);
+        frame.addKeyListener(new EmulatorKeyListener());
         frame.setSize(new Dimension(14 * ledsize + 10, 7 * ledsize + 30));
         frame.setMinimumSize(new Dimension(14 * ledsize + 10, 7 * ledsize + 30));
         frame.setResizable(false);
