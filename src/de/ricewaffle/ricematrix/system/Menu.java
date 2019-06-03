@@ -9,7 +9,7 @@ public class Menu extends Program
 	Element green = red.tint(new boolean[] { false, true, false });
 	Element blue = red.tint(new boolean[] { false, false, true });
 	
-	private int[] pos = { 0, 0 };
+	//private int[] pos = { 0, 0 };
 	
 	public Menu()
 	{
@@ -19,8 +19,21 @@ public class Menu extends Program
 	@Override
 	public void run()
 	{
-		//References.main.openProgram("snake");
+		long last = 0;
 		
+		while (true)
+		{
+			leds.setState(0, 0, false, true, false);
+			apply();
+			
+			if (KeyStates.up() && last + 2000 <= System.currentTimeMillis())
+			{
+				References.main.openProgram("snake");
+				last = System.currentTimeMillis();
+			}
+		}
+		
+		/*
 		while (true)
 		{
 			boolean change = false;
@@ -57,6 +70,6 @@ public class Menu extends Program
 					e.printStackTrace();
 				}
 			}
-		}
+		} */
 	}
 }

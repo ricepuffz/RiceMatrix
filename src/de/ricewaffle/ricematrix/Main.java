@@ -96,6 +96,7 @@ public class Main
 			context.push((Program) programclass.newInstance());
 			context.peek().run();
 		} catch (InstantiationException e) {
+			System.out.println("oops");
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
